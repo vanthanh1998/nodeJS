@@ -1,5 +1,6 @@
 import express from 'express';
 import configViewEngine from './configs/viewEngine';
+import connection from './configs/connectDB';
 import initWebRoute from './route/web';
 require('dotenv').config();
 
@@ -11,7 +12,6 @@ configViewEngine(app);
 
 // init web route
 initWebRoute(app);
-
 
 app.listen(port, () => {
   console.log(`Thanhrain port ${port}`)
