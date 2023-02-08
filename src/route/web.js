@@ -5,13 +5,12 @@ let router = express.Router();
 
 const initWebRoute = (app) => {
     router.get('/', homeController.getHomePage);
-    router.get('/detail/user/:id', homeController.getDetailPage)
+    router.get('/detail/user/:id', homeController.getDetailPage);
+    router.post('/add-user', homeController.addUser);
 
     router.get('/about', (req, res) => {
         res.send(`I'm thanhrain`)
     });
-
-
 
     return app.use('/', router)
 }
