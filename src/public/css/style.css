@@ -49,3 +49,11 @@ body {
     background-color: #04AA6D;
     color: white;
   }
+  label{
+    display: block;
+  }
+  #form-add{
+    width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
