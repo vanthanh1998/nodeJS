@@ -28,8 +28,8 @@ let addUser = async (req, res) => {
     
     try{
         await pool.execute(
-            "INSERT INTO users (first_name, last_name, email, address) VALUES (?,?,?,?)",
-            [first_name, last_name, email, address],
+            'INSERT INTO users (first_name, last_name, email, address) VALUES (?,?,?,?)',
+            [first_name, last_name, email, address]
           );
         return res.redirect('/');
       } catch (error) { 
@@ -37,6 +37,40 @@ let addUser = async (req, res) => {
     };
 }
 
+let deleteUser = async (req, res) => {
+    let userId = req.body.userId;
+    console.log("user_id:", userId);
+    try{
+        await pool.execute(
+            'DELETE FROM users WHERE `id` = ?', [userId],
+          );
+        return res.redirect('/');
+      } catch (error) { 
+        console.log(">>> error: ",error);
+    };
+}
+
+let getEditPage = async (req, res) => {
+    let id = req.params.id;
+    let [user] = await pool.execute('select * FROM users where id = ?', [id]) // trả ra array
+    console.log(JSON.stringify(user)); // convert qua kiểu string
+    return res.render('home/update.ejs', { dataUser: user[0]})
+}
+
+let postUpdateUser = async (req, res) => {
+    console.log('check request >>', req.body);
+    let {first_name, last_name, email, address, userId } = req.body;  // userId get từ input hidden file view ejs
+    try{
+        await pool.execute(
+            'UPDATE users SET first_name = ?, last_name = ?, email = ?, address = ? WHERE id = ?',
+            [first_name, last_name, email, address, userId]   // userId get từ input hidden file view ejs
+          );
+        return res.redirect('/');
+      } catch (error) { 
+        console.log('>> error: ',error);
+    };
+}
+
 module.exports = {
-    getHomePage, getDetailPage, addUser
+    getHomePage, getDetailPage, addUser, deleteUser, getEditPage, postUpdateUser
 }
