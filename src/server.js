@@ -1,6 +1,7 @@
 import express from 'express';
 import configViewEngine from './configs/viewEngine';
 import initWebRoute from './route/web';
+import initApiRoute from './route/api';
 
 require('dotenv').config();
 
@@ -16,6 +17,9 @@ configViewEngine(app);
 
 // init web route
 initWebRoute(app);
+
+// init api route
+initApiRoute(app);
 
 app.listen(port, () => {
   console.log(`Thanhrain port ${port}`)
