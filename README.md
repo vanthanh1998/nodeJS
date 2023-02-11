@@ -12,4 +12,8 @@ package:
 + npm install dotenv --save
 + npm install --save mysql2
 
+//////// npm  upload
++ npm install --save multer => upload file
++ npm i -S app-root-path
+
  -->
