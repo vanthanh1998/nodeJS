@@ -40,6 +40,7 @@ const initWebRoute = (app) => {
 
     router.get('/upload', homeController.getUploadFilePage);
     router.post('/upload-profile-pic', upload.single('profile_pic'), homeController.handleUploadFile);
+    router.post('/upload-multiple-images', upload.array('multiple_images'), homeController.handleUploadMultipleFile); // upload.array('multiple_images', 4) // upload max 4 img
 
     router.get('/about', (req, res) => {
         res.send(`I'm thanhrain`)
